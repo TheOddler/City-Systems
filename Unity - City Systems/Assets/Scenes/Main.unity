@@ -638,11 +638,6 @@ Prefab:
       propertyPath: m_Name
       value: Person (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 195785955461316302, guid: f5d817bd3af74bb46b282667cc37ec5b,
-        type: 2}
-      propertyPath: m_ObstacleAvoidanceType
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5d817bd3af74bb46b282667cc37ec5b, type: 2}
   m_IsPrefabParent: 0
