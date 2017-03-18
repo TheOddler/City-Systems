@@ -1529,7 +1529,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1552046265}
   - component: {fileID: 1552046269}
-  - component: {fileID: 1552046268}
   - component: {fileID: 1552046267}
   - component: {fileID: 1552046266}
   m_Layer: 0
@@ -1599,18 +1598,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1552046268
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1552046264}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1552046269
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1837,7 +1824,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2074918196}
-  - component: {fileID: 2074918198}
   - component: {fileID: 2074918197}
   - component: {fileID: 2074918199}
   m_Layer: 0
@@ -1854,7 +1840,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2074918195}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.86, y: -0.056, z: 9.88}
+  m_LocalPosition: {x: 13.74, y: -0.06, z: 9.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2108361843}
@@ -1873,10 +1859,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf9355555ffa874e8fc585dedebe9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridSize: {x: 7, y: 7}
+  _size: {x: 7, y: 7}
   _xCount: 7
   _yCount: 7
-  _origin: {x: 0, y: 1, z: 0}
+  _offset: {x: 0, y: 1, z: 0}
   _ray: {x: 0, y: -1, z: 0}
   _good:
     serializedVersion: 2
@@ -1884,21 +1870,6 @@ MonoBehaviour:
   _bad:
     serializedVersion: 2
     m_Bits: 0
---- !u!54 &2074918198
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2074918195}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &2074918199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1910,10 +1881,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf9355555ffa874e8fc585dedebe9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridSize: {x: 7, y: 7}
+  _size: {x: 7, y: 7}
   _xCount: 7
   _yCount: 7
-  _origin: {x: 0, y: 0.1, z: 0}
+  _offset: {x: 0, y: 0.1, z: 0}
   _ray: {x: 0, y: 3, z: 0}
   _good:
     serializedVersion: 2
@@ -1930,7 +1901,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2108361843}
   - component: {fileID: 2108361842}
-  - component: {fileID: 2108361841}
   - component: {fileID: 2108361840}
   - component: {fileID: 2108361839}
   m_Layer: 0
@@ -1987,18 +1957,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2108361841
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2108361838}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &2108361842
 MeshFilter:
   m_ObjectHideFlags: 0
