@@ -60,6 +60,7 @@ public class PlacementRaycastGridNode : MonoBehaviour, PlacementNode
 
 	void OnDrawGizmos()
     {
+        // Mirrored of IsHappy()
         for (int x = 0; x < _xCount; ++x)
         {
             for (int y = 0; y < _yCount; ++y)
