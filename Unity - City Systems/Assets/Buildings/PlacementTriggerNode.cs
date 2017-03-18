@@ -2,7 +2,7 @@
 using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Collider))]
-public class PlacementChecker : MonoBehaviour
+public class PlacementTriggerNode : MonoBehaviour, PlacementNode
 {
 	[SerializeField]
 	LayerMask _good;
