@@ -106,6 +106,7 @@ public class PlacementCastGridNode : MonoBehaviour, PlacementNode
 		if (HitsCache.Length == HitsCacheUsed)
 		{
 			Array.Resize(ref HitsCache, HitsCache.Length * 2);
+			Debug.Log("Increased hit cache size to: " + HitsCache.Length);
 		}
 
 		return HitsCache.Take(HitsCacheUsed).Where(h => !h.transform.IsChildOf(transform));
