@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class PlacementCastGridNode : MonoBehaviour, PlacementNode
 {
+	// Constants
 	static readonly Color BAD = new Color(1, 0, 0, .8f);
 	static readonly Color GOOD = new Color(0, 1, 0, .3f);
 
@@ -16,6 +18,7 @@ public class PlacementCastGridNode : MonoBehaviour, PlacementNode
 		Capsule
 	}
 
+	// Settings
 	[Header("Grid")]
 	[SerializeField] Vector2 _size = new Vector2(4, 4);
 	[SerializeField] float _height = 4;
@@ -26,6 +29,10 @@ public class PlacementCastGridNode : MonoBehaviour, PlacementNode
 	[Header("Happiness")]
 	[SerializeField] LayerMask _good;
 	[SerializeField] LayerMask _bad;
+
+	// Cache
+	static int HitsCacheUsed = 0;
+	static RaycastHit[] HitsCache = new RaycastHit[8];
 
 	public bool IsHappy() 
 	{
@@ -80,21 +87,28 @@ public class PlacementCastGridNode : MonoBehaviour, PlacementNode
 		{
 			case CastType.Ray:
 			{
-				var normal = Physics.RaycastAll(origin, direction, distance).Where(h => !h.transform.IsChildOf(transform));
-				var reverse = Physics.RaycastAll(origin + direction * _height, -direction, distance).Where(h => !h.transform.IsChildOf(transform));
-				return normal.Concat(reverse);
-			}
+				float radius = .01f;
+				HitsCacheUsed = Physics.SphereCastNonAlloc(origin + direction * radius, radius, direction, HitsCache, Mathf.Max(distance - radius * 2, 0));
+			} break;
 			case CastType.Box:
 			{
-				return Physics.BoxCastAll(origin + direction * _height / 2, new Vector3(stepSize.x/2, _height/2, stepSize.y/2), direction, transform.rotation, 0);
-			}
+				float extend = Mathf.Max(stepSize.x, stepSize.y) / 2;
+				HitsCacheUsed = Physics.BoxCastNonAlloc(origin + direction * extend/2, new Vector3(stepSize.x/2, extend/2, stepSize.y/2), direction, HitsCache, transform.rotation, Mathf.Max(distance - extend, 0));
+			} break;
 			case CastType.Capsule:
 			{
 				float radius = Mathf.Max(stepSize.x, stepSize.y) / 2;
-				return Physics.CapsuleCastAll(origin + direction * radius, origin + direction * distance - direction * radius, radius, direction, 0);
-			}
+				HitsCacheUsed = Physics.SphereCastNonAlloc(origin + direction * radius, radius, direction, HitsCache, Mathf.Max(distance - radius * 2, 0));
+			} break;
 			default: throw new UnityException("Unknown cast type used.");
 		}
+
+		if (HitsCache.Length == HitsCacheUsed)
+		{
+			Array.Resize(ref HitsCache, HitsCache.Length * 2);
+		}
+
+		return HitsCache.Take(HitsCacheUsed).Where(h => !h.transform.IsChildOf(transform));
 	}
 
 	void DrawCast(int x, int y)
