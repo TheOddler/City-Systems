@@ -82,8 +82,7 @@ public class PlacementCastGridNode : MonoBehaviour, PlacementNode
 			{
 				var normal = Physics.RaycastAll(origin, direction, distance).Where(h => !h.transform.IsChildOf(transform));
 				var reverse = Physics.RaycastAll(origin + direction * _height, -direction, distance).Where(h => !h.transform.IsChildOf(transform));
-				var hits = normal.Concat(reverse);
-				return hits;
+				return normal.Concat(reverse);
 			}
 			case CastType.Box:
 			{
