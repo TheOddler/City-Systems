@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class PlacementRaycastGridNode : MonoBehaviour, PlacementNode
+public class PlacementCastGridNode : MonoBehaviour, PlacementNode
 {
     [Header("Grid")]
     [SerializeField] Vector2 _size = new Vector2(4, 4);
@@ -9,7 +9,15 @@ public class PlacementRaycastGridNode : MonoBehaviour, PlacementNode
     [SerializeField] int _yCount = 4;
     [SerializeField] Vector3 _offset = Vector3.zero;
 
-    [Header("Rays")]
+    enum CastType
+    {
+        Ray,
+        Box,
+        Capsule,
+        Sphere
+    }
+    [Header("Casting")]
+    [SerializeField] CastType _type = CastType.Ray;
     [SerializeField] Vector3 _ray = Vector3.down;
 
     [Header("Happiness")]
@@ -24,11 +32,11 @@ public class PlacementRaycastGridNode : MonoBehaviour, PlacementNode
         {
             for (int y = 0; y < _yCount; ++y)
             {
-                Vector2 stepSize = new Vector2(_size.x / _xCount, _size.y / _yCount);
+                Vector2 stepSize = new Vector2(_size.x / (_xCount-1), _size.y / (_yCount-1));
                 Vector3 origin = transform.TransformPoint(
-                    _offset.x - _size.x/2 + stepSize.x/2 + stepSize.x * x, 
+                    _offset.x - _size.x/2 + stepSize.x * x, 
                     _offset.y, 
-                    _offset.z - _size.y/2 + stepSize.y/2 + stepSize.y * y );
+                    _offset.z - _size.y/2 + stepSize.y * y );
                 Vector3 direction = transform.TransformDirection(_ray);
                 
                 // Raycast
@@ -65,11 +73,11 @@ public class PlacementRaycastGridNode : MonoBehaviour, PlacementNode
         {
             for (int y = 0; y < _yCount; ++y)
             {
-                Vector2 stepSize = new Vector2(_size.x / _xCount, _size.y / _yCount);
+                Vector2 stepSize = new Vector2(_size.x / (_xCount-1), _size.y / (_yCount-1));
                 Vector3 origin = transform.TransformPoint(
-                    _offset.x - _size.x/2 + stepSize.x/2 + stepSize.x * x, 
+                    _offset.x - _size.x/2 + stepSize.x * x, 
                     _offset.y, 
-                    _offset.z - _size.y/2 + stepSize.y/2 + stepSize.y * y );
+                    _offset.z - _size.y/2 + stepSize.y * y );
                 Vector3 direction = transform.TransformDirection(_ray);
 
                 // Default = good (happens when not hitting anything bad, and there is nothing good)
