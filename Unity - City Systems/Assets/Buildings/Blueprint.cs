@@ -17,7 +17,14 @@ public class Blueprint : MonoBehaviour, IDragHandler
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, _placeMask))
 		{
-			transform.position = hit.point;
+			var xAngle = Mathf.Min( Vector3.Angle(Vector3.right, hit.normal),	Vector3.Angle(Vector3.left, hit.normal) );
+			var yAngle = Mathf.Min( Vector3.Angle(Vector3.up, hit.normal),		Vector3.Angle(Vector3.down, hit.normal) );
+			var zAngle = Mathf.Min( Vector3.Angle(Vector3.forward, hit.normal),	Vector3.Angle(Vector3.back, hit.normal) );
+
+			var x = yAngle <= 45 || zAngle <= 45 ? Mathf.Round(hit.point.x) : hit.point.x;
+			var y = xAngle <= 45 || zAngle <= 45 ? Mathf.Round(hit.point.y) : hit.point.y;
+			var z = xAngle <= 45 || yAngle <= 45 ? Mathf.Round(hit.point.z) : hit.point.z;
+			transform.position = new Vector3(x, y, z);
 		}
     }
 
