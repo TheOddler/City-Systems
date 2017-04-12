@@ -1,15 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using cakeslice;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Blueprint : MonoBehaviour, IDragHandler
+public class Blueprint : MonoBehaviour, IDragHandler, IPointerClickHandler
 {
 	const int BAD_PLACE_COLOR = 0;
 	const int GOOD_PLACE_COLOR = 1;
 
 	[SerializeField]
-	LayerMask _placeMask = 256; //LayerMask.GetMask( new String[] {"Terrain"} );
+	LayerMask _placeMask = 256; //256 = LayerMask.GetMask( new String[] {"Terrain"} );
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -28,7 +29,15 @@ public class Blueprint : MonoBehaviour, IDragHandler
 		}
     }
 
-	void Update()
+    public void OnPointerClick(PointerEventData eventData)
+    {
+		if (eventData.clickCount == 2)
+		{
+			// BUILD
+		}
+    }
+
+    void Update()
 	{
 		var glowers = GetComponentsInChildren<Outline>();
 		var placementNodes = GetComponentsInChildren<PlacementNode>();
